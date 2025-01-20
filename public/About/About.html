@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Cosmic Explorations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000915;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.5; }
+        }
+
+        .header {
+            padding: 1.5rem;
+            background: rgba(0, 9, 21, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #64b5f6, #e91e63);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-text-fill-color: transparent;
+            text-fill-color: transparent;
+            animation: glow 3s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 2px #64b5f6); }
+            50% { filter: drop-shadow(0 0 8px #e91e63); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .nav-links a:hover {
+            color: #64b5f6;
+        }
+
+        .about-hero {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            margin-top: 80px;
+        }
+
+        .about-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .about-section {
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease-out;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .about-section h2 {
+            color: #64b5f6;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .about-section p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 3px solid #64b5f6;
+        }
+
+        .team-member h3 {
+            color: #64b5f6;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <header class="header">
+        <nav>
+            <div class="logo">Cosmic Explorations</div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="#discoveries">Discoveries</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#">About</a>
+                <a href="/Contact/contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="about-hero">
+        <h1>Our Mission to the Stars</h1>
+    </section>
+
+    <div class="about-content">
+        <div class="about-section">
+            <h2>The Mission</h2>
+            <p>This ISP project, Cosmic Explorations, is designed to serve as a source of information that is easily accessible to everyone, regardless of experience or age. It is my hope to learn more about astronomy and to then pass it on to others.</p>
+        </div>
+
+        <div class="about-section">
+            <h2>Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="/api/placeholder/120/120" alt="Thomas Roney" />
+                    <h3>Thomas Roney</h3>
+                    <p>Website Programmer and Researcher</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function createStars() {
+                const stars = document.getElementById('stars');
+                if (!stars) return;
+
+                stars.innerHTML = '';
+
+                for (let i = 0; i < 200; i++) {
+                    const star = document.createElement('div');
+                    star.style.position = 'absolute';
+                    star.style.left = Math.random() * 100 + '%';
+                    star.style.top = Math.random() * 100 + '%';
+                    star.style.width = Math.random() * 3 + 'px';
+                    star.style.height = star.style.width;
+                    star.style.backgroundColor = '#fff';
+                    star.style.borderRadius = '50%';
+                    star.style.opacity = Math.random();
+                    stars.appendChild(star);
+                }
+            }
+
+            createStars();
+
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const stars = document.getElementById('stars');
+                if (stars) {
+                    stars.style.transform = `translateY(${scrolled * 0.3}px)`;
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                if (this.resizeTimeout) clearTimeout(this.resizeTimeout);
+                this.resizeTimeout = setTimeout(() => {
+                    createStars();
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Cosmic Explorations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000915;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            animation: twinkle 2s infinite;
+            z-index: -1;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.5; }
+        }
+
+        .header {
+            padding: 1.5rem;
+            background: rgba(0, 9, 21, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #64b5f6, #e91e63);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -moz-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -moz-text-fill-color: transparent;
+            text-fill-color: transparent;
+            animation: glow 3s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 2px #64b5f6); }
+            50% { filter: drop-shadow(0 0 8px #e91e63); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .nav-links a:hover {
+            color: #64b5f6;
+        }
+
+        .gallery-hero {
+            height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            margin-top: 80px;
+        }
+
+        .gallery-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .gallery-hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .gallery-filters {
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+            padding: 0 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(100, 181, 246, 0.3);
+            border-radius: 25px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #64b5f6;
+            border-color: #64b5f6;
+        }
+
+        .gallery-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            animation: fadeInUp 1s ease-out;
+            aspect-ratio: 1;
+            background: rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-item-info {
+            transform: translateY(0);
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .modal-info {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -2rem;
+            right: -2rem;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 1rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-prev {
+            left: 1rem;
+        }
+
+        .modal-next {
+            right: 1rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1rem;
+                padding: 1rem;
+            }
+        }
+        .showcase {
+            max-width: 1600px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .showcase-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            height: 300px;
+        }
+
+        .showcase-item {
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .showcase-item:hover {
+            transform: scale(1.02);
+        }
+
+        .showcase-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .showcase-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .showcase-item-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .showcase-item:hover .showcase-item-info {
+            transform: translateY(0);
+        }
+
+        .showcase-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: #64b5f6;
+        }
+
+        @media (max-width: 768px) {
+            .showcase-container {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(2, 200px);
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <header class="header">
+        <nav>
+            <div class="logo">Cosmic Explorations</div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="#discoveries">Discoveries</a>
+                <a href="#">Gallery</a>
+                <a href="/About/About.html">About</a>
+                <a href="/Contact/contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="gallery-hero">
+        <div>
+            <h1>Cosmic Gallery</h1>
+            <p>Explore the beauty of the universe through our collection of stunning astronomical images.</p>
+        </div>
+    </section>
+    
+    <section class="showcase">
+        <h2 class="showcase-title">Featured Discoveries</h2>
+        <div class="showcase-container" id="showcaseContainer">
+            <div class="showcase-item">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.esa.int%2Fvar%2Fesa%2Fstorage%2Fimages%2Fesa_multimedia%2Fimages%2F2010%2F04%2Fhubble_captures_spectacular_landscape_in_the_carina_nebula%2F9994172-2-eng-GB%2FHubble_captures_spectacular_landscape_in_the_Carina_Nebula_pillars.jpg&f=1&nofb=1&ipt=55edc5872fc19324c9b990ddf6ecf26e768f1591d3f23212ef2ee9b526c50fd1&ipo=images" alt="Carina Nebula">
+                <div class="showcase-item-info">
+                    <h3>Carina Nebula</h3>
+                    <p>James Webb Telescope</p>
+                </div>
+            </div>
+            <div class="showcase-item">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.fzehMfGWcZtsQ3m9ZaVG7QHaHb%26pid%3DApi&f=1&ipt=377a3fd06b475befb46399d2401cdd6a148001817b2f56c0d7293854fc83b03e&ipo=images" alt="Saturn's Rings">
+                <div class="showcase-item-info">
+                    <h3>Saturn's Rings</h3>
+                    <p>Cassini Mission</p>
+                </div>
+            </div>
+            <div class="showcase-item">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.UeOAvXtTvzaThDjVOzA4AwHaFq%26pid%3DApi&f=1&ipt=b52b18605cf8ff214cf1b9f2ff9546c345076ac7d55d4086adbf2ce4898bc168&ipo=images" alt="Andromeda Galaxy">
+                <div class="showcase-item-info">
+                    <h3>Andromeda Galaxy</h3>
+                    <p>Hubble Telescope</p>
+                </div>
+            </div>
+            <div class="showcase-item">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.oVaceTgAu_rjnrQQPfPukQHaFh%26pid%3DApi&f=1&ipt=43e4fb081e80600f4b2df224b867fdfd3c9f7bca3587f407043126a5b7eb48ef&ipo=images" alt="Mars Surface">
+                <div class="showcase-item-info">
+                    <h3>Mars Surface</h3>
+                    <p>Perseverance Rover</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="gallery-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="planets">Planets</button>
+        <button class="filter-btn" data-filter="nebulae">Nebulae</button>
+        <button class="filter-btn" data-filter="galaxies">Galaxies</button>
+    </div>
+
+    <div class="gallery-grid">
+        <!-- Using placeholder images for demonstration -->
+        <div class="gallery-item" data-category="planets">
+            <img src="/api/placeholder/400/400" alt="Mars Surface">
+            <div class="gallery-item-info">
+                <h3>Mars Surface</h3>
+                <p>Captured by Perseverance Rover</p>
+            </div>
+        </div>
+        <div class="gallery-item" data-category="nebulae">
+            <img src="/api/placeholder/400/400" alt="Carina Nebula">
+            <div class="gallery-item-info">
+                <h3>Carina Nebula</h3>
+                <p>James Webb Space Telescope</p>
+            </div>
+        </div>
+        <div class="gallery-item" data-category="galaxies">
+            <img src="/api/placeholder/400/400" alt="Andromeda Galaxy">
+            <div class="gallery-item-info">
+                <h3>Andromeda Galaxy</h3>
+                <p>Hubble Space Telescope</p>
+            </div>
+        </div>
+        <!-- Add more gallery items as needed -->
+    </div>
+
+    <div class="modal" id="imageModal">
+        <button class="modal-close">&times;</button>
+        <button class="modal-nav modal-prev">&lt;</button>
+        <button class="modal-nav modal-next">&gt;</button>
+        <div class="modal-content">
+            <img src="" alt="" class="modal-image">
+            <div class="modal-info">
+                <h3></h3>
+                <p></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Stars background
+            function createStars() {
+                const stars = document.getElementById('stars');
+                if (!stars) return;
+
+                stars.innerHTML = '';
+
+                for (let i = 0; i < 200; i++) {
+                    const star = document.createElement('div');
+                    star.style.position = 'absolute';
+                    star.style.left = Math.random() * 100 + '%';
+                    star.style.top = Math.random() * 100 + '%';
+                    star.style.width = Math.random() * 3 + 'px';
+                    star.style.height = star.style.width;
+                    star.style.backgroundColor = '#fff';
+                    star.style.borderRadius = '50%';
+                    star.style.opacity = Math.random();
+                    stars.appendChild(star);
+                }
+            }
+
+            createStars();
+
+            // Gallery filtering
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    // Filter items
+                    const filter = button.dataset.filter;
+                    galleryItems.forEach(item => {
+                        if (filter === 'all' || item.dataset.category === filter) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Modal functionality
+            const modal = document.getElementById('imageModal');
+            const modalImage = modal.querySelector('.modal-image');
+            const modalTitle = modal.querySelector('.modal-info h3');
+            const modalDesc = modal.querySelector('.modal-info p');
+            let currentImageIndex = 0;
+
+            function openModal(index) {
+                const item = galleryItems[index];
+                const img = item.querySelector('img');
+                const info = item.querySelector('.gallery-item-info');
+
+                modalImage.src = img.src;
+                modalImage.alt = img.alt;
+                modalTitle.textContent = info.querySelector('h3').textContent;
+                modalDesc.textContent = info.querySelector('p').textContent;
+                modal.classList.add('active');
+                currentImageIndex = index;
+            }
+
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', () => openModal(index));
+            });
+
+            // Close modal
+            modal.querySelector('.modal-close').addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+
+            // Navigation
+            modal.querySelector('.modal-prev').addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
+                openModal(currentImageIndex);
+            });
+
+            modal.querySelector('.modal-next').addEventListener('click', () => {
+                currentImageIndex = (currentImageIndex + 1) % galleryItems.length;
+                openModal(currentImageIndex);
+            });
+
+            // Close modal on outside click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+
+            // Scroll effect for stars
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const stars = document.getElementById('stars');
+                if (stars) {
+                    stars.style.transform = `translateY(${scrolled * 0.3}px)`;
+                }
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (this.resizeTimeout) clearTimeout(this.resizeTimeout);
+                this.resizeTimeout = setTimeout(() => {
+                    createStars();
+                }, 300);
+            });
+        });
+        const showcaseContainer = document.getElementById('showcaseContainer');
+        const showcaseImages = [
+            {
+                src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.esa.int%2Fvar%2Fesa%2Fstorage%2Fimages%2Fesa_multimedia%2Fimages%2F2010%2F04%2Fhubble_captures_spectacular_landscape_in_the_carina_nebula%2F9994172-2-eng-GB%2FHubble_captures_spectacular_landscape_in_the_Carina_Nebula_pillars.jpg&f=1&nofb=1&ipt=55edc5872fc19324c9b990ddf6ecf26e768f1591d3f23212ef2ee9b526c50fd1&ipo=images",
+                alt: "Carina Nebula",
+                title: "Carina Nebula",
+                description: "James Webb Telescope"
+            },
+            {
+                src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.fzehMfGWcZtsQ3m9ZaVG7QHaHb%26pid%3DApi&f=1&ipt=377a3fd06b475befb46399d2401cdd6a148001817b2f56c0d7293854fc83b03e&ipo=images",
+                alt: "Saturn's Rings",
+                title: "Saturn's Rings",
+                description: "Cassini Mission"
+            },
+            {
+                src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.UeOAvXtTvzaThDjVOzA4AwHaFq%26pid%3DApi&f=1&ipt=b52b18605cf8ff214cf1b9f2ff9546c345076ac7d55d4086adbf2ce4898bc168&ipo=images",
+                alt: "Andromeda Galaxy",
+                title: "Andromeda Galaxy",
+                description: "Hubble Telescope"
+            },
+            {
+                src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.oVaceTgAu_rjnrQQPfPukQHaFh%26pid%3DApi&f=1&ipt=43e4fb081e80600f4b2df224b867fdfd3c9f7bca3587f407043126a5b7eb48ef&ipo=images",
+                alt: "Mars Surface",
+                title: "Mars Surface",
+                description: "Perseverance Rover"
+            },
+            {
+                src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.L7iQRfgVCVjhgd6gBt7u6QHaFZ%26pid%3DApi&f=1&ipt=c3d1d866964c70a0b75f1f8282d07be9181e9d5b4a39ef090652e3cd428f1ea0&ipo=images",
+                alt: "Orion Nebula",
+                title: "Orion Nebula",
+                description: "James Webb Telescope"
+            },
+            {
+                src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.newscientist.com%2Fwp-content%2Fuploads%2F2018%2F03%2F05113301%2Fpia21978.jpg&f=1&nofb=1&ipt=81b93234577526497ca314356ce3870615ac32830faecb2c8bcf897d99b6fb9a&ipo=images",
+                alt: "Jupiter's Storm",
+                title: "Jupiter's Storm",
+                description: "Juno Mission"
+            },
+            {
+                src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.VkkaIWCtsiraHYBPsCglnwHaH7%26pid%3DApi&f=1&ipt=462527f0b6ad3d09ebf6a9bb34c1c062d82e0b2eff705c79bbd7264b71cb7354&ipo=images",
+                alt: "Whirlpool Galaxy",
+                title: "Whirlpool Galaxy",
+                description: "Hubble Telescope"
+            },
+            {
+                src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP._kPJbsE9XiLJXHpzd62ERAHaHa%26pid%3DApi&f=1&ipt=b67ccf3a6c8b656bb6fa5c09fee1ae0af55880ee0bd2a4848fbc857c9fb89a20&ipo=images",
+                alt: "Venus Atmosphere",
+                title: "Venus Atmosphere",
+                description: "Magellan Mission"
+            }
+        ];
+
+        let currentIndex = 0;
+
+        function updateShowcase() {
+            const items = showcaseContainer.querySelectorAll('.showcase-item');
+            items.forEach((item, index) => {
+                const imageIndex = (currentIndex + index) % showcaseImages.length;
+                const image = showcaseImages[imageIndex];
+                
+                // Create new content with fade effect
+                const newItem = document.createElement('div');
+                newItem.className = 'showcase-item';
+                newItem.style.opacity = '0';
+                
+                newItem.innerHTML = `
+                    <img src="${image.src}" alt="${image.alt}">
+                    <div class="showcase-item-info">
+                        <h3>${image.title}</h3>
+                        <p>${image.description}</p>
+                    </div>
+                `;
+                
+                // Replace old item with fade effect
+                item.style.opacity = '0';
+                setTimeout(() => {
+                    item.replaceWith(newItem);
+                    setTimeout(() => {
+                        newItem.style.opacity = '1';
+                    }, 50);
+                }, 300);
+            });
+
+            currentIndex = (currentIndex + 1) % showcaseImages.length;
+        }
+
+        // Update showcase every 5 seconds
+        setInterval(updateShowcase, 5000);
+    </script>
+</body>
+</html>

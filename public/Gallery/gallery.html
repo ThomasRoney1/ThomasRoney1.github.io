@@ -365,28 +365,28 @@
         <h2 class="showcase-title">Featured Discoveries</h2>
         <div class="showcase-container" id="showcaseContainer">
             <div class="showcase-item">
-                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.esa.int%2Fvar%2Fesa%2Fstorage%2Fimages%2Fesa_multimedia%2Fimages%2F2010%2F04%2Fhubble_captures_spectacular_landscape_in_the_carina_nebula%2F9994172-2-eng-GB%2FHubble_captures_spectacular_landscape_in_the_Carina_Nebula_pillars.jpg&f=1&nofb=1&ipt=55edc5872fc19324c9b990ddf6ecf26e768f1591d3f23212ef2ee9b526c50fd1&ipo=images" alt="Carina Nebula">
+                <img src="/pictures/CarinaNebula.jpg" alt="Carina Nebula">
                 <div class="showcase-item-info">
                     <h3>Carina Nebula</h3>
                     <p>James Webb Telescope</p>
                 </div>
             </div>
             <div class="showcase-item">
-                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.fzehMfGWcZtsQ3m9ZaVG7QHaHb%26pid%3DApi&f=1&ipt=377a3fd06b475befb46399d2401cdd6a148001817b2f56c0d7293854fc83b03e&ipo=images" alt="Saturn's Rings">
+                <img src="/pictures/SaturnRing.jpg" alt="Saturn's Rings">
                 <div class="showcase-item-info">
                     <h3>Saturn's Rings</h3>
                     <p>Cassini Mission</p>
                 </div>
             </div>
             <div class="showcase-item">
-                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.UeOAvXtTvzaThDjVOzA4AwHaFq%26pid%3DApi&f=1&ipt=b52b18605cf8ff214cf1b9f2ff9546c345076ac7d55d4086adbf2ce4898bc168&ipo=images" alt="Andromeda Galaxy">
+                <img src="/pictures/Andromeda.jpg" alt="Andromeda Galaxy">
                 <div class="showcase-item-info">
                     <h3>Andromeda Galaxy</h3>
                     <p>Hubble Telescope</p>
                 </div>
             </div>
             <div class="showcase-item">
-                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.oVaceTgAu_rjnrQQPfPukQHaFh%26pid%3DApi&f=1&ipt=43e4fb081e80600f4b2df224b867fdfd3c9f7bca3587f407043126a5b7eb48ef&ipo=images" alt="Mars Surface">
+                <img src="/pictures/MarsSurface.jpg" alt="Mars Surface">
                 <div class="showcase-item-info">
                     <h3>Mars Surface</h3>
                     <p>Perseverance Rover</p>
@@ -405,21 +405,21 @@
     <div class="gallery-grid">
         <!-- Using placeholder images for demonstration -->
         <div class="gallery-item" data-category="planets">
-            <img src="/api/placeholder/400/400" alt="Mars Surface">
+            <img src="/pictures/MarsSurface.jpg" alt="Mars Surface">
             <div class="gallery-item-info">
                 <h3>Mars Surface</h3>
                 <p>Captured by Perseverance Rover</p>
             </div>
         </div>
         <div class="gallery-item" data-category="nebulae">
-            <img src="/api/placeholder/400/400" alt="Carina Nebula">
+            <img src="/pictures/CarinaNebula.jpg" alt="Carina Nebula">
             <div class="gallery-item-info">
                 <h3>Carina Nebula</h3>
                 <p>James Webb Space Telescope</p>
             </div>
         </div>
         <div class="gallery-item" data-category="galaxies">
-            <img src="/api/placeholder/400/400" alt="Andromeda Galaxy">
+            <img src="/pictures/Andromeda.jpg" alt="Andromeda Galaxy">
             <div class="gallery-item-info">
                 <h3>Andromeda Galaxy</h3>
                 <p>Hubble Space Telescope</p>
@@ -555,49 +555,49 @@
         const showcaseContainer = document.getElementById('showcaseContainer');
         const showcaseImages = [
             {
-                src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.esa.int%2Fvar%2Fesa%2Fstorage%2Fimages%2Fesa_multimedia%2Fimages%2F2010%2F04%2Fhubble_captures_spectacular_landscape_in_the_carina_nebula%2F9994172-2-eng-GB%2FHubble_captures_spectacular_landscape_in_the_Carina_Nebula_pillars.jpg&f=1&nofb=1&ipt=55edc5872fc19324c9b990ddf6ecf26e768f1591d3f23212ef2ee9b526c50fd1&ipo=images",
+                src: "/pictures/CarinaNebula.jpg",
                 alt: "Carina Nebula",
                 title: "Carina Nebula",
                 description: "James Webb Telescope"
             },
             {
-                src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.fzehMfGWcZtsQ3m9ZaVG7QHaHb%26pid%3DApi&f=1&ipt=377a3fd06b475befb46399d2401cdd6a148001817b2f56c0d7293854fc83b03e&ipo=images",
+                src: "/pictures/SaturnRing.jpg",
                 alt: "Saturn's Rings",
                 title: "Saturn's Rings",
                 description: "Cassini Mission"
             },
             {
-                src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.UeOAvXtTvzaThDjVOzA4AwHaFq%26pid%3DApi&f=1&ipt=b52b18605cf8ff214cf1b9f2ff9546c345076ac7d55d4086adbf2ce4898bc168&ipo=images",
+                src: "/pictures/Andromeda.jpg",
                 alt: "Andromeda Galaxy",
                 title: "Andromeda Galaxy",
                 description: "Hubble Telescope"
             },
             {
-                src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.oVaceTgAu_rjnrQQPfPukQHaFh%26pid%3DApi&f=1&ipt=43e4fb081e80600f4b2df224b867fdfd3c9f7bca3587f407043126a5b7eb48ef&ipo=images",
+                src: "/pictures/MarsSurface.jpg",
                 alt: "Mars Surface",
                 title: "Mars Surface",
                 description: "Perseverance Rover"
             },
             {
-                src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.L7iQRfgVCVjhgd6gBt7u6QHaFZ%26pid%3DApi&f=1&ipt=c3d1d866964c70a0b75f1f8282d07be9181e9d5b4a39ef090652e3cd428f1ea0&ipo=images",
+                src: "/pictures/OrionNebula.jpg",
                 alt: "Orion Nebula",
                 title: "Orion Nebula",
                 description: "James Webb Telescope"
             },
             {
-                src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.newscientist.com%2Fwp-content%2Fuploads%2F2018%2F03%2F05113301%2Fpia21978.jpg&f=1&nofb=1&ipt=81b93234577526497ca314356ce3870615ac32830faecb2c8bcf897d99b6fb9a&ipo=images",
+                src: "/pictures/JupiterStorm.jpg",
                 alt: "Jupiter's Storm",
                 title: "Jupiter's Storm",
                 description: "Juno Mission"
             },
             {
-                src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.VkkaIWCtsiraHYBPsCglnwHaH7%26pid%3DApi&f=1&ipt=462527f0b6ad3d09ebf6a9bb34c1c062d82e0b2eff705c79bbd7264b71cb7354&ipo=images",
+                src: "/pictures/Whirlpool.jpg",
                 alt: "Whirlpool Galaxy",
                 title: "Whirlpool Galaxy",
                 description: "Hubble Telescope"
             },
             {
-                src: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP._kPJbsE9XiLJXHpzd62ERAHaHa%26pid%3DApi&f=1&ipt=b67ccf3a6c8b656bb6fa5c09fee1ae0af55880ee0bd2a4848fbc857c9fb89a20&ipo=images",
+                src: "/pictures/VenusSurface.jpg",
                 alt: "Venus Atmosphere",
                 title: "Venus Atmosphere",
                 description: "Magellan Mission"

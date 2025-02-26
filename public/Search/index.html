@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search - Cosmic Explorations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000915;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            padding-top: 80px; 
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            animation: twinkle 2s infinite;
+            z-index: -1;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 0.5; }
+        }
+
+        .header {
+            padding: 1.5rem;
+            background: rgba(0, 9, 21, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            height: 80px; 
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #64b5f6;
+            text-shadow: 0 0 10px #e91e63;
+            animation: glow 3s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 2px #64b5f6); }
+            50% { filter: drop-shadow(0 0 8px #e91e63); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .nav-links a:hover {
+            color: #64b5f6;
+        }
+
+        .search-hero {
+            min-height: 60vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+            margin-top: 2rem; 
+        }
+
+        .search-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .search-hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+
+        .search-box {
+            display: flex;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(100, 181, 246, 0.3);
+            border-radius: 50px;
+            color: #fff;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #64b5f6;
+            box-shadow: 0 0 15px rgba(100, 181, 246, 0.5);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            bottom: 5px;
+            width: 50px;
+            background: #64b5f6;
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-btn:hover {
+            background: #1e88e5;
+            transform: scale(1.05);
+        }
+
+        .results-container {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+        }
+
+        .results-info {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: #64b5f6;
+        }
+
+        .search-categories {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 0.5rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(100, 181, 246, 0.3);
+            border-radius: 25px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: #64b5f6;
+            border-color: #64b5f6;
+        }
+
+        .search-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .result-img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+        .result-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .result-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: #64b5f6;
+        }
+
+        .result-desc {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .result-link {
+            align-self: flex-start;
+            padding: 0.5rem 1.5rem;
+            background: rgba(100, 181, 246, 0.2);
+            border: 1px solid #64b5f6;
+            border-radius: 25px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .result-link:hover {
+            background: #64b5f6;
+        }
+
+        .quick-links {
+            max-width: 800px;
+            margin: 2rem auto 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+
+        .quick-links h2 {
+            margin-bottom: 1.5rem;
+            color: #64b5f6;
+            font-size: 1.5rem;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .quick-link {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .quick-link:hover {
+            background: rgba(100, 181, 246, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .quick-link a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+        }
+
+        .quick-link i {
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #64b5f6;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px; 
+            }
+            
+            .header {
+                height: 70px;
+            }
+            
+            .search-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .search-results {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-categories {
+                justify-content: center;
+            }
+            
+            .search-hero {
+                padding-top: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <header class="header">
+        <nav>
+            <div class="logo">Cosmic Explorations</div>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="#">Search</a>
+                <a href="/Gallery/gallery.html">Gallery</a>
+                <a href="/About/About.html">About</a>
+                <a href="/Contact/contact.html">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="search-hero">
+        <div>
+            <h1>Explore the Cosmos</h1>
+            <p>Journey through our stellar collection of cosmic knowledge and imagery.</p>
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Search the universe..." id="searchInput">
+                    <button class="search-btn" id="searchButton">🔍</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="results-container" id="resultsSection" style="display: none;">
+        <div class="results-info" id="resultsInfo">Showing results for: <span id="searchQuery"></span></div>
+        
+        <div class="search-categories">
+            <button class="category-btn active" data-category="all">All Results</button>
+            <button class="category-btn" data-category="planets">Planets</button>
+            <button class="category-btn" data-category="nebulae">Nebulae</button>
+            <button class="category-btn" data-category="galaxies">Galaxies</button>
+            <button class="category-btn" data-category="missions">Missions</button>
+        </div>
+        
+        <div class="search-results" id="searchResults">
+            <!-- Results will be populated dynamically -->
+        </div>
+    </section>
+    
+    <section class="quick-links">
+        <h2>Popular Destinations</h2>
+        <div class="links-grid">
+            <div class="quick-link">
+                <a href="/pictures/CarinaNebula.jpg">
+                    <i>🌌</i>
+                    Carina Nebula
+                </a>
+            </div>
+            <div class="quick-link">
+                <a href="/pictures/SaturnRing.jpg">
+                    <i>🪐</i>
+                    Saturn's Rings
+                </a>
+            </div>
+            <div class="quick-link">
+                <a href="/pictures/Andromeda.jpg">
+                    <i>🌠</i>
+                    Andromeda Galaxy
+                </a>
+            </div>
+            <div class="quick-link">
+                <a href="/pictures/MarsSurface.jpg">
+                    <i>🔴</i>
+                    Mars Surface
+                </a>
+            </div>
+            <div class="quick-link">
+                <a href="/pictures/JupiterStorm.jpg">
+                    <i>🌪️</i>
+                    Jupiter Storms
+                </a>
+            </div>
+            <div class="quick-link">
+                <a href="#discoveries">
+                    <i>🔭</i>
+                    Latest Discoveries
+                </a>
+            </div>
+            <div class="quick-link">
+                <a href="/About/About.html">
+                    <i>ℹ️</i>
+                    About Our Mission
+                </a>
+            </div>
+            <div class="quick-link">
+                <a href="/Contact/contact.html">
+                    <i>📞</i>
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create stars background
+            function createStars() {
+                const stars = document.getElementById('stars');
+                if (!stars) return;
+
+                stars.innerHTML = '';
+
+                for (let i = 0; i < 200; i++) {
+                    const star = document.createElement('div');
+                    star.style.position = 'absolute';
+                    star.style.left = Math.random() * 100 + '%';
+                    star.style.top = Math.random() * 100 + '%';
+                    star.style.width = Math.random() * 3 + 'px';
+                    star.style.height = star.style.width;
+                    star.style.backgroundColor = '#fff';
+                    star.style.borderRadius = '50%';
+                    star.style.opacity = Math.random();
+                    stars.appendChild(star);
+                }
+            }
+
+            createStars();
+
+            // Sample site data for search functionality
+            const siteData = [
+                {
+                    title: "Carina Nebula",
+                    description: "Explore the stunning imagery and scientific data from the Carina Nebula, captured by the James Webb Space Telescope.",
+                    image: "/pictures/CarinaNebula.jpg",
+                    link: "/pictures/CarinaNebula.jpg",
+                    category: "nebulae"
+                },
+                {
+                    title: "Saturn's Rings",
+                    description: "Discover the mysteries of Saturn's magnificent ring system through the eyes of the Cassini Mission.",
+                    image: "/pictures/SaturnRing.jpg",
+                    link: "/pictures/SaturnRing.jpg",
+                    category: "planets"
+                },
+                {
+                    title: "Andromeda Galaxy",
+                    description: "Learn about our neighboring galaxy, Andromeda, and what its eventual collision with the Milky Way will mean for our cosmic future.",
+                    image: "/pictures/Andromeda.jpg",
+                    link: "/pictures/Andromeda.jpg",
+                    category: "galaxies"
+                },
+                {
+                    title: "Mars Surface",
+                    description: "Explore the red planet's surface through the latest imagery and data from the Perseverance Rover mission.",
+                    image: "/pictures/MarsSurface.jpg",
+                    link: "/pictures/MarsSurface.jpg",
+                    category: "planets"
+                },
+                {
+                    title: "Orion Nebula",
+                    description: "Journey through the stellar nursery of the Orion Nebula, one of the most studied regions of active star formation.",
+                    image: "/pictures/OrionNebula.jpg",
+                    link: "/pictures/OrionNebula.jpg",
+                    category: "nebulae"
+                },
+                {
+                    title: "Jupiter's Storm",
+                    description: "Examine the powerful storms of Jupiter, including the Great Red Spot, through data from the Juno Mission.",
+                    image: "/pictures/JupiterStorm.jpg",
+                    link: "/pictures/JupiterStorm.jpg",
+                    category: "planets"
+                },
+                {
+                    title: "Whirlpool Galaxy",
+                    description: "Study the spectacular spiral structure of the Whirlpool Galaxy (M51) and its ongoing interaction with a neighboring galaxy.",
+                    image: "/pictures/Whirlpool.jpg",
+                    link: "/pictures/Whirlpool.jpg",
+                    category: "galaxies"
+                },
+                {
+                    title: "Venus Atmosphere",
+                    description: "Penetrate the dense clouds of Venus to understand the extreme conditions on our neighboring planet.",
+                    image: "/pictures/VenusSurface.jpg",
+                    link: "/pictures/VenusSurface.jpg",
+                    category: "planets"
+                },
+                {
+                    title: "James Webb Space Telescope",
+                    description: "Learn about NASA's latest and most powerful space telescope, designed to unlock the mysteries of the universe.",
+                    image: "/pictures/CarinaNebula.jpg",
+                    link: "#jwst",
+                    category: "missions"
+                },
+                {
+                    title: "Perseverance Mars Mission",
+                    description: "Follow the journey of NASA's Perseverance rover as it searches for signs of ancient life on the red planet.",
+                    image: "/pictures/MarsSurface.jpg",
+                    link: "#perseverance",
+                    category: "missions"
+                },
+                {
+                    title: "About Cosmic Explorations",
+                    description: "Learn about our mission to bring the wonders of the universe to everyone through stunning imagery and educational content.",
+                    image: "/pictures/Andromeda.jpg",
+                    link: "/About/About.html",
+                    category: "about"
+                },
+                {
+                    title: "Contact Our Team",
+                    description: "Have questions about astronomy or space exploration? Reach out to our team of experts.",
+                    image: "/pictures/JupiterStorm.jpg",
+                    link: "/Contact/contact.html",
+                    category: "contact"
+                }
+            ];
+
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+            const searchResults = document.getElementById('searchResults');
+            const resultsSection = document.getElementById('resultsSection');
+            const searchQuery = document.getElementById('searchQuery');
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            
+            // Perform search
+            function performSearch() {
+                const query = searchInput.value.toLowerCase().trim();
+                if (query === '') return;
+                
+                searchQuery.textContent = query;
+                resultsSection.style.display = 'block';
+                
+                // Filter results based on search query
+                const results = siteData.filter(item => 
+                    item.title.toLowerCase().includes(query) || 
+                    item.description.toLowerCase().includes(query) ||
+                    item.category.toLowerCase().includes(query)
+                );
+                
+                displayResults(results, 'all');
+                
+                // Scroll to results
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            }
+            
+            // Display search results
+            function displayResults(results, category) {
+                searchResults.innerHTML = '';
+                
+                const filteredResults = category === 'all' 
+                    ? results 
+                    : results.filter(item => item.category === category);
+                
+                if (filteredResults.length === 0) {
+                    searchResults.innerHTML = `
+                        <div class="no-results">
+                            <p>No results found. Try a different search term or category.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                filteredResults.forEach(result => {
+                    const resultCard = document.createElement('div');
+                    resultCard.className = 'result-card';
+                    resultCard.innerHTML = `
+                        <img src="${result.image}" alt="${result.title}" class="result-img">
+                        <div class="result-content">
+                            <h3 class="result-title">${result.title}</h3>
+                            <p class="result-desc">${result.description}</p>
+                            <a href="${result.link}" class="result-link">Explore</a>
+                        </div>
+                    `;
+                    searchResults.appendChild(resultCard);
+                });
+            }
+            
+            // Event listeners
+            searchButton.addEventListener('click', performSearch);
+            searchInput.addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            // Category filtering
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // Get current search results
+                    const query = searchInput.value.toLowerCase().trim();
+                    if (query === '') return;
+                    
+                    const results = siteData.filter(item => 
+                        item.title.toLowerCase().includes(query) || 
+                        item.description.toLowerCase().includes(query) ||
+                        item.category.toLowerCase().includes(query)
+                    );
+                    
+                    // Filter by category
+                    displayResults(results, button.dataset.category);
+                });
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (this.resizeTimeout) clearTimeout(this.resizeTimeout);
+                this.resizeTimeout = setTimeout(() => {
+                    createStars();
+                }, 300);
+            });
+            
+            // Scroll effect for stars
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const stars = document.getElementById('stars');
+                if (stars) {
+                    stars.style.transform = `translateY(${scrolled * 0.3}px)`;
+                }
+            });
+
+            // Add example searches to demonstrate functionality when page loads
+            setTimeout(() => {
+                const demoSearches = ["nebula", "mars", "galaxy"];
+                const randomSearch = demoSearches[Math.floor(Math.random() * demoSearches.length)];
+                searchInput.value = randomSearch;
+                performSearch();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

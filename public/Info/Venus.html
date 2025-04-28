@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cosmic Explorations - Venus</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #000915;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Venus swirling animated background */
+    .venus-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, #f9a825, #ef6c00, #bf360c);
+      background-size: 400% 400%;
+      animation: swirl 60s linear infinite;
+      z-index: -2;
+      opacity: 0.5;
+      filter: blur(60px);
+    }
+
+    @keyframes swirl {
+      0% {
+        transform: rotate(0deg) scale(1);
+      }
+      50% {
+        transform: rotate(180deg) scale(1.2);
+      }
+      100% {
+        transform: rotate(360deg) scale(1);
+      }
+    }
+
+    .header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      padding: 1.5rem;
+      background: rgba(0, 9, 21, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      height: 80px;
+    }
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #64b5f6;
+      text-shadow: 0 0 10px #e91e63;
+      animation: glow 3s infinite;
+    }
+    @keyframes glow {
+      0%, 100% {
+        text-shadow: 0 0 10px #e91e63, 0 0 20px #e91e63, 0 0 30px #e91e63;
+      }
+      50% {
+        text-shadow: 0 0 20px #64b5f6, 0 0 30px #64b5f6, 0 0 40px #64b5f6;
+      }
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover {
+      color: #64b5f6;
+    }
+    .hero {
+      padding-top: 100px;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      background: rgba(0, 9, 21, 0.8);
+    }
+    .content {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 2rem;
+    }
+    .info-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+    .info-image {
+      flex: 1 1 400px;
+      max-width: 600px;
+    }
+    .info-image img {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+    .info-text {
+      flex: 1 1 300px;
+    }
+    .info-text h2 {
+      color: #64b5f6;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .info-text p {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .footer {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(0, 9, 21, 0.9);
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="venus-background"></div>
+
+  <header class="header">
+    <nav>
+      <div class="logo">Cosmic Explorations</div>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/public/Search/index.html">Search</a>
+        <a href="/public/Gallery/gallery.html">Gallery</a>
+        <a href="/public/About/About.html">About</a>
+        <a href="/public/Contact/contact.html">Contact</a>
+      </div>
+    </nav>
+  </header>
+  
+  <section class="hero">
+    <div>
+      <h1>Venus</h1>
+      <p>The Earth's twin — a planet of volcanic landscapes, dense clouds, and extreme greenhouse conditions.</p>
+    </div>
+  </section>
+  
+  <section class="content" id="info">
+    <div class="info-container">
+      <div class="info-image">
+        <img src="/public/pictures/Venus.jpg" alt="Venus">
+      </div>
+      <div class="info-text">
+        <h2>About Venus</h2>
+        <p>
+          Venus is the second planet from the Sun and is often called Earth's twin due to its similar size and mass. However, its environment is wildly different: the surface temperature is hot enough to melt lead, and its thick atmosphere traps heat through a runaway greenhouse effect.
+        </p>
+        <p>
+          Venus’s atmosphere is composed mostly of carbon dioxide, with clouds of sulfuric acid, making it the hottest planet in our solar system. The planet's surface is hidden beneath perpetual cloud cover but radar mapping has revealed vast volcanic plains, mountains, and deformed highlands.
+        </p>
+        <h2>Notable Missions to Venus</h2>
+        <ul>
+          <li>Venera 7 (1970) - First successful landing on another planet and first data returned from Venus’s surface.</li>
+          <li>Venera 9 (1975) - First images from the surface of Venus.</li>
+          <li>Pioneer Venus (1978) - Orbiter and multiprobe mission that studied Venus’s atmosphere and surface.</li>
+          <li>Magellan (1989) - Used radar to map 98% of Venus’s surface.</li>
+          <li>Akatsuki (2010) - Japanese mission still studying Venus’s weather and atmosphere.</li>
+          <li>VERITAS (Upcoming) - NASA mission planned to map Venus with high resolution radar in the 2030s.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  
+  <footer class="footer">
+    <p>&copy; 2025 Cosmic Explorations. All rights reserved.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cosmic Explorations - Earth</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: black url(http://fc01.deviantart.net/fs71/f/2012/160/b/9/stars_by_paulinemoss-d52un4e.jpg);
+      animation: stars 205s linear alternate;
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      animation: twinkle 2s infinite;
+    }
+    .header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      padding: 1.5rem;
+      background: rgba(0, 9, 21, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      height: 80px;
+    }
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #64b5f6;
+      text-shadow: 0 0 10px #e91e63;
+      animation: glow 3s infinite;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover {
+      color: #64b5f6;
+    }
+
+    /* HERO SECTION – updated to sit just below header and be more compact */
+    .hero {
+      margin-top: 80px;    /* exactly header height */
+      min-height: 40vh;    /* shrinks overall height */
+      padding: 2rem;       /* tighter padding */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: rgba(0, 9, 21, 0.8);
+    }
+
+    .content {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 2rem;
+    }
+    .info-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+    .info-text {
+      flex: 1 1 300px;
+    }
+    .info-text h2 {
+      color: #64b5f6;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .info-text p {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .earth-animation {
+      background: url(https://cdn.rawgit.com/ManzDev/cursos-assets/gh-pages/css3/earth-2.jpg);
+      background-size: cover;
+      border: 2px solid #000;
+      border-radius: 50%;
+      width: 200px;
+      height: 200px;
+      animation: movimiento 5s linear infinite;
+      box-shadow:
+        0 0 25px rgba(255,255,255,0.10),
+        -8px -8px 15px #000 inset,
+        2px 2px 25px #000 inset,
+        -45px -45px 25px rgba(0,0,0,0.5) inset,
+        25px 25px 45px rgba(0,0,0,0.45) inset;
+      margin: 6em auto;
+      transform: rotateX(6deg) rotateY(6deg) rotateZ(6deg);
+    }
+    @keyframes movimiento {
+      0%   { background-position: 0 0; }
+      100% { background-position: 355px 0; }
+    }
+    @keyframes stars {
+      0%   { background-position: 0 0; }
+      100% { background-position: 0 100%; }
+    }
+    @keyframes twinkle {
+      0%,100% { opacity: 1; }
+      50%     { opacity: 0.5; }
+    }
+    @keyframes glow {
+      0%,100% { text-shadow: 0 0 10px #e91e63; }
+      50%     { text-shadow: 0 0 20px #64b5f6; }
+    }
+    .footer {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(0, 9, 21, 0.9);
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+
+  <header class="header">
+    <nav>
+      <div class="logo">Cosmic Explorations</div>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/public/Search/index.html">Search</a>
+        <a href="/public/Gallery/gallery.html">Gallery</a>
+        <a href="/public/About/About.html">About</a>
+        <a href="/public/Contact/contact.html">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1>Earth</h1>
+      <p>Our home planet in the vast universe.</p>
+    </div>
+  </section>
+
+  <section class="content" id="info">
+    <div class="info-container">
+      <div class="earth-animation" id="box"></div>
+      <div class="info-text">
+        <h2>About Earth</h2>
+        <p>
+          Earth is the third planet from the Sun and the only known planet to support life. With a rich atmosphere, vast oceans, and diverse ecosystems, Earth has developed unique conditions for the flourishing of life. Its surface is made up of approximately 71% water and 29% land, and it features a variety of biomes, including forests, deserts, and polar ice caps.
+        </p>
+        <p>
+          Earth orbits the Sun at an average distance of 149.6 million kilometers, taking roughly 365.25 days to complete one revolution. This rotation gives rise to day and night, while the axial tilt creates the seasons. Earth's magnetic field, generated by the movement of molten iron in its core, protects the planet from harmful solar radiation.
+        </p>
+        <p>
+          Earth has a natural satellite, the Moon, which is responsible for phenomena such as tides. The relationship between Earth and the Moon has been central to understanding the dynamics of celestial bodies in our solar system. Earth's history has been marked by dramatic geological changes, including plate tectonics, volcanic activity, and the shifting of continents.
+        </p>
+        <p>
+          Earth is currently facing significant environmental challenges, including climate change, deforestation, and pollution. Efforts to mitigate these issues are critical to ensuring the planet's continued habitability for future generations.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 Cosmic Explorations. All rights reserved.</p>
+  </footer>
+</body>
+</html>

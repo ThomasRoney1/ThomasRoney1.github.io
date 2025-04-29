@@ -370,32 +370,37 @@
 
     <section class="search-hero">
         <div>
-            <h1>Explore the Cosmos</h1>
-            <p>Journey through our stellar collection of cosmic knowledge and imagery.</p>
-            <div class="search-container">
-                <div class="search-box">
-                    <input type="text" class="search-input" placeholder="Search the universe..." id="searchInput">
-                    <button class="search-btn" id="searchButton">🔍</button>
-                </div>
+          <h1>Explore the Cosmos</h1>
+          <p>Journey through our stellar collection of cosmic knowledge and imagery.</p>
+          <div class="search-container">
+            <div class="search-box">
+              <input type="text" class="search-input" placeholder="Search the universe..." id="searchInput">
+              <button class="search-btn" id="searchButton">🔍</button>
             </div>
+          </div>
         </div>
-    </section>
-    
-    <section class="results-container" id="resultsSection" style="display: none;">
+      </section>
+      
+      <section class="results-container" id="resultsSection" style="display: none;">
         <div class="results-info" id="resultsInfo">Showing results for: <span id="searchQuery"></span></div>
-        
+      
         <div class="search-categories">
-            <button class="category-btn active" data-category="all">All Results</button>
-            <button class="category-btn" data-category="planets">Planets</button>
-            <button class="category-btn" data-category="nebulae">Nebulae</button>
-            <button class="category-btn" data-category="galaxies">Galaxies</button>
-            <button class="category-btn" data-category="missions">Missions</button>
+          <button class="category-btn active" data-category="all">All Results</button>
+          <button class="category-btn" data-category="planets">Planets</button>
+          <button class="category-btn" data-category="moons">Moons</button>
+          <button class="category-btn" data-category="dwarf planets">Dwarf Planets</button>
+          <button class="category-btn" data-category="asteroids">Asteroids</button>
+          <button class="category-btn" data-category="stars">Stars</button>
+          <button class="category-btn" data-category="phenomena">Phenomena</button>
+          <button class="category-btn" data-category="nebulae">Nebulae</button>
+          <button class="category-btn" data-category="galaxies">Galaxies</button>
+          <button class="category-btn" data-category="missions">Missions</button>
         </div>
-        
+      
         <div class="search-results" id="searchResults">
-            <!-- Results will be populated dynamically -->
+          <!-- Results will be populated dynamically -->
         </div>
-    </section>
+      </section>
     
     <section class="quick-links">
         <h2>Popular Destinations</h2>
@@ -452,7 +457,7 @@
     </section>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function() { 
             // Create stars background
             function createStars() {
                 const stars = document.getElementById('stars');
@@ -474,100 +479,430 @@
                 }
             }
 
+
             createStars();
 
             const siteData = [
-                {
-                    title: "Andromeda Galaxy",
-                    description: "Learn about our neighboring galaxy, Andromeda, and what its eventual collision with the Milky Way will mean for our cosmic future.",
-                    image: "/public/pictures/Andromeda.jpg",
-                    link: "/public/Info/Andromeda.html",
-                    category: "galaxies"
-                },
-                {
-                    title: "Carina Nebula",
-                    description: "Explore the stunning imagery and scientific data from the Carina Nebula, captured by the James Webb Space Telescope.",
-                    image: "/public/pictures/CarinaNebula.jpg",
-                    link: "/public/Info/CarinaNebula.html",
-                    category: "nebulae"
-                },
-                {
-                    title: "James Webb Space Telescope",
-                    description: "Learn about NASA's latest and most powerful space telescope, designed to unlock the mysteries of the universe.",
-                    image: "/public/pictures/JamesWebb.jpg",
-                    link: "/public/Info/JamesWebb.html",
-                    category: "missions"
-                },
-                {
-                    title: "Jupiter",
-                    description: "Learn more about the largest planet in our solar system.",
-                    image: "/public/pictures/Jupiter.jpg",
-                    link: "/public/Info/Jupiter.html",
-                    category: "planet"
-                },
-                {
-                    title: "Jupiter's Storms",
-                    description: "Learn more about the endless tempests bombarding Jupiter, including the famous Red Spot.",
-                    image: "/public/pictures/JupiterStorm.jpg",
-                    link: "/public/Info/JupiterStorm.html",
-                    category: "planet"
-                },
-                {
-                    title: "Mars",
-                    description: "Learn more about the red planet.",
-                    image: "/public/pictures/Mars.jpg",
-                    link: "/public/Info/Mars.html",
-                    category: "planets"
-                },
-                {
-                    title: "Mars Surface",
-                    description: "Explore the red planet's surface through the latest imagery and data from the Perseverance Rover mission.",
-                    image: "/public/pictures/MarsSurface.jpg",
-                    link: "/public/Info/MarsSurface.html",
-                    category: "planets"
-                },
-                {
-                    title: "Orion Nebula",
-                    description: "Journey through the stellar nursery of the Orion Nebula, one of the most studied regions of active star formation.",
-                    image: "/public/pictures/OrionNebula.jpg",
-                    link: "/public/Info/OrionNebula.html",
-                    category: "nebulae"
-                },
-                {
-                    title: "Saturn's Rings",
-                    description: "Discover the mysteries of Saturn's magnificent ring system through the eyes of the Cassini Mission.",
-                    image: "/public/pictures/SaturnRing.jpg",
-                    link: "/public/Info/SaturnRing.html",
-                    category: "planets"
-                },
-                {
-                    title: "The Solar System",
-                    description: "Get started with our model of the Solar System",
-                    image: "/public/pictures/SolarSystem.jpg",
-                    link: "/public/Info/SolarSystem.html",
-                    category: "planets"
-                },
-                {
-                    title: "Venus",
-                    description: "Learn more about our neighboring planet.",
-                    image: "/public/pictures/Venus.jpg",
-                    link: "/public/Info/Venus.html",
-                    category: "planets"
-                },
-                {
-                    title: "Venus's Surface",
-                    description: "Learn more about the remarkably inhospitable conditions on our neighboring planet.",
-                    image: "/public/pictures/VenusSurface.jpg",
-                    link: "/public/Info/VenusSurface.html",
-                    category: "planets"
-                },
-                {
-                    title: "Whirlpool Galaxy",
-                    description: "Study the spectacular spiral structure of the Whirlpool Galaxy (M51) and its ongoing interaction with a neighboring galaxy.",
-                    image: "/public/pictures/Whirlpool.jpg",
-                    link: "/public/Info/Whirlpool.html",
-                    category: "galaxies"
-                },
+            {
+        title: "Alpha Centauri",
+        description: "Discover the closest star system to the Solar System, featuring a pair of Sun-like stars and a red dwarf.",
+        image: "/public/pictures/AlphaCentauri.jpg",
+        link: "/public/Info/AlphaCentauri.html",
+        category: "stars"
+    },
+    {
+        title: "Andromeda Galaxy",
+        description: "Learn about our neighboring galaxy, Andromeda, and what its eventual collision with the Milky Way will mean for our cosmic future.",
+        image: "/public/pictures/Andromeda.jpg",
+        link: "/public/Info/Andromeda.html",
+        category: "galaxies"
+    },
+    {
+        title: "Antares",
+        description: "Learn about Antares, the massive red supergiant star in the heart of the Scorpius constellation.",
+        image: "/public/pictures/Antares.jpg",
+        link: "/public/Info/Antares.html",
+        category: "stars"
+    },
+    {
+        title: "Arp 273",
+        description: "Explore the cosmic dance of Arp 273, two interacting galaxies twisted into a beautiful rose-like shape.",
+        image: "/public/pictures/ARP273.jpg",
+        link: "/public/Info/Arp273.html",
+        category: "galaxies"
+    },
+    {
+        title: "Aurora Borealis",
+        description: "Dive into the stunning natural light displays seen near the poles, caused by solar wind interacting with Earth's atmosphere.",
+        image: "/public/pictures/AuroraBorealis.jpg",
+        link: "/public/Info/AuroraBorealis.html",
+        category: "phenomena"
+    },
+    {
+        title: "Betelgeuse",
+        description: "Learn about Betelgeuse, the bright and volatile red supergiant star nearing the end of its life.",
+        image: "/public/pictures/Betelgeuse.jpg",
+        link: "/public/Info/Betelgeuse.html",
+        category: "stars"
+    },
+    {
+        title: "Black Holes",
+        description: "Uncover the mysteries of black holes, regions of spacetime exhibiting gravitational forces so strong that nothing can escape.",
+        image: "/public/pictures/BlackHoles.jpg",
+        link: "/public/Info/BlackHoles.html",
+        category: "phenomena"
+    },
+    {
+        title: "Blazar",
+        description: "Explore one of the universe’s most energetic phenomena: a blazar, a supermassive black hole shooting jets directly at Earth.",
+        image: "/public/pictures/Blazar.jpg",
+        link: "/public/Info/Blazar.html",
+        category: "phenomena"
+    },
+    {
+        title: "Bootes Void",
+        description: "Discover the Bootes Void, one of the largest known empty spaces in the universe, spanning nearly 330 million light-years.",
+        image: "/public/pictures/BootesVoid.jpg",
+        link: "/public/Info/BootesVoid.html",
+        category: "phenomena"
+    },
+    {
+        title: "Callisto",
+        description: "Learn about Callisto, one of Jupiter’s largest moons, known for its heavily cratered surface and subsurface ocean possibilities.",
+        image: "/public/pictures/Callisto.jpg",
+        link: "/public/Info/Callisto.html",
+        category: "moons"
+    },
+    {
+        title: "Carina Nebula",
+        description: "Explore the stunning imagery and scientific data from the Carina Nebula, captured by the James Webb Space Telescope.",
+        image: "/public/pictures/CarinaNebula.jpg",
+        link: "/public/Info/CarinaNebula.html",
+        category: "nebulae"
+    },
+    {
+        title: "Cassiopeia A",
+        description: "Explore Cassiopeia A, a powerful supernova remnant providing a window into the explosive deaths of massive stars.",
+        image: "/public/pictures/CassiopeiaA.jpg",
+        link: "/public/Info/CassiopeiaA.html",
+        category: "nebulae"
+    },
+    {
+        title: "Ceres",
+        description: "Explore Ceres, the largest object in the asteroid belt between Mars and Jupiter, considered a dwarf planet.",
+        image: "/public/pictures/Ceres.jpg",
+        link: "/public/Info/Ceres.html",
+        category: "dwarf-planets"
+    },
+    {
+        title: "Charon",
+        description: "Discover Charon, Pluto's largest moon, half the size of its parent and essential to the Pluto-Charon binary system.",
+        image: "/public/pictures/Charon.jpg",
+        link: "/public/Info/Charon.html",
+        category: "moons"
+    },
+    {
+        title: "Crab Nebula",
+        description: "Study the Crab Nebula, a stunning supernova remnant and pulsar wind nebula in the constellation Taurus.",
+        image: "/public/pictures/CrabNebula.jpg",
+        link: "/public/Info/CrabNebula.html",
+        category: "nebulae"
+    },
+    {
+        title: "Deimos",
+        description: "Learn about Deimos, the smaller and outermost moon of Mars, captured long ago from the asteroid belt.",
+        image: "/public/pictures/Deimos.jpg",
+        link: "/public/Info/Deimos.html",
+        category: "moons"
+    },
+    {
+        title: "Earth",
+        description: "Explore Earth, our home planet, the only known world to support life in the universe.",
+        image: "/public/pictures/Earth.jpg",
+        link: "/public/Info/Earth.html",
+        category: "planets"
+    },
+    {
+        title: "Enceladus",
+        description: "Learn about Saturn's moon Enceladus, home to icy geysers and a hidden ocean beneath its frozen crust.",
+        image: "/public/pictures/Enceladus.jpg",
+        link: "/public/Info/Enceladus.html",
+        category: "moons"
+    },
+    {
+        title: "Europa",
+        description: "Discover Europa, Jupiter’s icy moon with a subsurface ocean that could potentially harbor life.",
+        image: "/public/pictures/Europa.jpg",
+        link: "/public/Info/Europa.html",
+        category: "moons"
+    },
+    {
+        title: "Ganymede",
+        description: "Explore Ganymede, Jupiter’s largest moon, larger than Mercury and possessing its own magnetic field.",
+        image: "/public/pictures/Ganymede.jpg",
+        link: "/public/Info/Ganymede.html",
+        category: "moons"
+    },
+    {
+        title: "Great Red Spot",
+        description: "Study Jupiter’s Great Red Spot, a massive storm larger than Earth that has raged for centuries.",
+        image: "/public/pictures/GreatRedSpot.jpg",
+        link: "/public/Info/GreatRedSpot.html",
+        category: "planet"
+    },
+    {
+        title: "Halley's Comet",
+        description: "Learn about Halley’s Comet, the most famous periodic comet, visible from Earth approximately every 76 years.",
+        image: "/public/pictures/HalleysComet.jpg",
+        link: "/public/Info/HalleysComet.html",
+        category: "comets"
+    },
+    {
+        title: "Helix Nebula",
+        description: "Explore the Helix Nebula, often called the 'Eye of God,' a planetary nebula in the constellation Aquarius.",
+        image: "/public/pictures/HelixNebula.jpg",
+        link: "/public/Info/HelixNebula.html",
+        category: "nebulae"
+    },
+    {
+        title: "Hyperion",
+        description: "Discover Hyperion, Saturn's odd-shaped moon, known for its sponge-like appearance and chaotic rotation.",
+        image: "/public/pictures/Hyperion.jpg",
+        link: "/public/Info/Hyperion.html",
+        category: "moons"
+    },
+    {
+        title: "Io",
+        description: "Learn about Io, Jupiter’s highly volcanic moon, home to hundreds of active volcanoes and lava flows.",
+        image: "/public/pictures/Io.jpg",
+        link: "/public/Info/Io.html",
+        category: "moons"
+    },
+    {
+        title: "James Webb Space Telescope",
+        description: "Learn about NASA's latest and most powerful space telescope, designed to unlock the mysteries of the universe.",
+        image: "/public/pictures/JamesWebb.jpg",
+        link: "/public/Info/JamesWebb.html",
+        category: "missions"
+    },
+    {
+        title: "Jupiter",
+        description: "Learn more about the largest planet in our solar system.",
+        image: "/public/pictures/Jupiter.jpg",
+        link: "/public/Info/Jupiter.html",
+        category: "planet"
+    },
+    {
+        title: "Jupiter's Storms",
+        description: "Learn more about the endless tempests bombarding Jupiter, including the famous Red Spot.",
+        image: "/public/pictures/JupiterStorm.jpg",
+        link: "/public/Info/JupiterStorm.html",
+        category: "planet"
+    },
+    {
+        title: "Kuiper Belt",
+        description: "Explore the Kuiper Belt, a distant region of icy bodies beyond Neptune, home to Pluto and other dwarf planets.",
+        image: "/public/pictures/KuiperBelt.jpg",
+        link: "/public/Info/KuiperBelt.html",
+        category: "regions"
+    },
+    {
+        title: "Magellanic Clouds",
+        description: "Learn about the Large and Small Magellanic Clouds, two irregular dwarf galaxies orbiting the Milky Way.",
+        image: "/public/pictures/MagellanicClouds.jpg",
+        link: "/public/Info/MagellanicClouds.html",
+        category: "galaxies"
+    },
+    {
+        title: "Mars",
+        description: "Learn more about the red planet.",
+        image: "/public/pictures/Mars.jpg",
+        link: "/public/Info/Mars.html",
+        category: "planets"
+    },
+    {
+        title: "Mars Surface",
+        description: "Explore the red planet's surface through the latest imagery and data from the Perseverance Rover mission.",
+        image: "/public/pictures/MarsSurface.jpg",
+        link: "/public/Info/MarsSurface.html",
+        category: "planets"
+    },
+    {
+        title: "Mercury",
+        description: "Explore Mercury, the smallest and innermost planet of our Solar System.",
+        image: "/public/pictures/Mercury.jpg",
+        link: "/public/Info/Mercury.html",
+        category: "planets"
+    },
+    {
+        title: "Milky Way Galaxy",
+        description: "Discover the Milky Way, the barred spiral galaxy that is home to our Solar System.",
+        image: "/public/pictures/MilkyWay.jpg",
+        link: "/public/Info/MilkyWay.html",
+        category: "galaxies"
+    },
+    {
+        title: "Neptune",
+        description: "Explore Neptune, the icy giant known for its deep blue color and supersonic winds.",
+        image: "/public/pictures/Neptune.jpg",
+        link: "/public/Info/Neptune.html",
+        category: "planets"
+    },
+    {
+        title: "Orion Nebula",
+        description: "Journey through the stellar nursery of the Orion Nebula, one of the most studied regions of active star formation.",
+        image: "/public/pictures/OrionNebula.jpg",
+        link: "/public/Info/OrionNebula.html",
+        category: "nebulae"
+    },
+    {
+        title: "Phobos",
+        description: "Learn about Phobos, the larger and closer of Mars' two small moons, racing around the planet in just 7 hours.",
+        image: "/public/pictures/Phobos.jpg",
+        link: "/public/Info/Phobos.html",
+        category: "moons"
+    },
+    {
+        title: "Pluto",
+        description: "Explore Pluto, the famous dwarf planet known for its heart-shaped glacier and fascinating atmosphere.",
+        image: "/public/pictures/Pluto.jpg",
+        link: "/public/Info/Pluto.html",
+        category: "dwarf-planets"
+    },
+    {
+        title: "Polaris",
+        description: "Learn about Polaris, the North Star, a critical navigation marker and one of the brightest stars in the night sky.",
+        image: "/public/pictures/Polaris.jpg",
+        link: "/public/Info/Polaris.html",
+        category: "stars"
+    },
+    {
+        title: "Quasars",
+        description: "Study quasars, the ultra-luminous active galactic nuclei powered by supermassive black holes at the center of distant galaxies.",
+        image: "/public/pictures/Quasars.jpg",
+        link: "/public/Info/Quasars.html",
+        category: "phenomena"
+    },
+    {
+        title: "Ring Nebula",
+        description: "Explore the Ring Nebula, a planetary nebula in the constellation Lyra shaped like a glowing smoke ring.",
+        image: "/public/pictures/RingNebula.jpg",
+        link: "/public/Info/RingNebula.html",
+        category: "nebulae"
+    },
+    {
+        title: "Sagittarius A*",
+        description: "Learn about Sagittarius A*, the supermassive black hole located at the center of the Milky Way galaxy.",
+        image: "/public/pictures/SagittariusA.jpg",
+        link: "/public/Info/SagittariusA.html",
+        category: "phenomena"
+    },
+    {
+        title: "Saturn",
+        description: "Explore Saturn, the gas giant known for its dazzling ring system and dozens of fascinating moons.",
+        image: "/public/pictures/Saturn.jpg",
+        link: "/public/Info/Saturn.html",
+        category: "planets"
+    },
+    {
+        title: "Saturn's Rings",
+        description: "Discover the mysteries of Saturn's magnificent ring system through the eyes of the Cassini Mission.",
+        image: "/public/pictures/SaturnRing.jpg",
+        link: "/public/Info/SaturnRing.html",
+        category: "planets"
+    },
+    {
+        title: "Solar Flares",
+        description: "Learn about solar flares, intense bursts of radiation from the Sun that can affect space weather and communication systems on Earth.",
+        image: "/public/pictures/SolarFlare.jpg",
+        link: "/public/Info/SolarFlares.html",
+        category: "phenomena"
+    },
+    {
+        title: "The Solar System",
+        description: "Get started with our model of the Solar System.",
+        image: "/public/pictures/SolarSystem.jpg",
+        link: "/public/Info/SolarSystem.html",
+        category: "planets"
+    },
+    {
+        title: "Sirius",
+        description: "Explore Sirius, the brightest star in the Earth's night sky and part of the constellation Canis Major.",
+        image: "/public/pictures/Sirius.jpg",
+        link: "/public/Info/Sirius.html",
+        category: "stars"
+    },
+    {
+        title: "Spica",
+        description: "Learn about Spica, a brilliant blue giant star located in the constellation Virgo.",
+        image: "/public/pictures/Spica.jpg",
+        link: "/public/Info/Spica.html",
+        category: "stars"
+    },
+    {
+        title: "Sun",
+        description: "Explore the Sun, the heart of our Solar System, providing light, heat, and energy for life on Earth.",
+        image: "/public/pictures/Sun.jpg",
+        link: "/public/Info/Sun.html",
+        category: "stars"
+    },
+    {
+        title: "Tarantula Nebula",
+        description: "Journey through the Tarantula Nebula, one of the most active star-forming regions known, located in the Large Magellanic Cloud.",
+        image: "/public/pictures/TarantulaNebula.jpg",
+        link: "/public/Info/TarantulaNebula.html",
+        category: "nebulae"
+    },
+    {
+        title: "Titan",
+        description: "Learn about Titan, Saturn’s largest moon, known for its thick atmosphere and methane lakes.",
+        image: "/public/pictures/Titan.jpg",
+        link: "/public/Info/Titan.html",
+        category: "moons"
+    },
+    {
+        title: "Triton",
+        description: "Explore Triton, Neptune's largest moon, which orbits backward and may have once been a captured dwarf planet.",
+        image: "/public/pictures/Triton.jpg",
+        link: "/public/Info/Triton.html",
+        category: "moons"
+    },
+    {
+        title: "Uranus",
+        description: "Learn about Uranus, the tilted gas giant with a bluish color caused by methane in its atmosphere.",
+        image: "/public/pictures/Uranus.jpg",
+        link: "/public/Info/Uranus.html",
+        category: "planets"
+    },
+    {
+        title: "Vega",
+        description: "Discover Vega, one of the brightest stars in the night sky and a future North Star due to Earth's axial precession.",
+        image: "/public/pictures/Vega.jpg",
+        link: "/public/Info/Vega.html",
+        category: "stars"
+    },
+    {
+        title: "Venus",
+        description: "Learn more about our neighboring planet.",
+        image: "/public/pictures/Venus.jpg",
+        link: "/public/Info/Venus.html",
+        category: "planets"
+    },
+    {
+        title: "Venus's Surface",
+        description: "Learn more about the remarkably inhospitable conditions on our neighboring planet.",
+        image: "/public/pictures/VenusSurface.jpg",
+        link: "/public/Info/VenusSurface.html",
+        category: "planets"
+    },
+    {
+        title: "Vesta",
+        description: "Explore Vesta, one of the largest asteroids in the Solar System and a protoplanet leftover from its early formation.",
+        image: "/public/pictures/Vesta.jpg",
+        link: "/public/Info/Vesta.html",
+        category: "asteroids"
+    },
+    {
+        title: "Voyager Missions",
+        description: "Celebrate the Voyager spacecraft, humanity's farthest-reaching emissaries, now exploring interstellar space.",
+        image: "/public/pictures/Voyager.jpg",
+        link: "/public/Info/Voyager.html",
+        category: "missions"
+    },
+    {
+        title: "Whirlpool Galaxy",
+        description: "Study the spectacular spiral structure of the Whirlpool Galaxy (M51) and its ongoing interaction with a neighboring galaxy.",
+        image: "/public/pictures/Whirlpool.jpg",
+        link: "/public/Info/Whirlpool.html",
+        category: "galaxies"
+    },
+    {
+        title: "White Dwarfs",
+        description: "Explore the fate of Sun-like stars as they evolve into white dwarfs — dense, dying stellar cores.",
+        image: "/public/pictures/WhiteDwarfs.jpg",
+        link: "/public/Info/WhiteDwarfs.html",
+        category: "phenomena"
+    },
                 {
                     title: "Secret",
                     description: "It's a secret",
@@ -598,115 +933,113 @@
             const resultsSection = document.getElementById('resultsSection');
             const searchQuery = document.getElementById('searchQuery');
             const categoryButtons = document.querySelectorAll('.category-btn');
-            
-            // Perform search
+
             function performSearch() {
                 const query = searchInput.value.toLowerCase().trim();
-                if (query === '') return;
-                
-                searchQuery.textContent = query;
+                searchQuery.textContent = query || "Showing all results";
+
                 resultsSection.style.display = 'block';
-                
-                // Filter results based on search query
-                const results = siteData.filter(item => 
-                    item.title.toLowerCase().includes(query) || 
-                    item.description.toLowerCase().includes(query) ||
-                    item.category.toLowerCase().includes(query)
-                );
-                
-                displayResults(results, 'all');
-                
-                // Scroll to results
-                resultsSection.scrollIntoView({ behavior: 'smooth' });
-            }
-            
-            // Display search results
-            function displayResults(results, category) {
-                searchResults.innerHTML = '';
-                
-                const filteredResults = category === 'all' 
-                    ? results 
-                    : results.filter(item => item.category === category);
-                
-                if (filteredResults.length === 0) {
-                    searchResults.innerHTML = `
-                        <div class="no-results">
-                            <p>No results found. Try a different search term or category.</p>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                filteredResults.forEach(result => {
-                    const resultCard = document.createElement('div');
-                    resultCard.className = 'result-card';
-                    resultCard.innerHTML = `
-                        <img src="${result.image}" alt="${result.title}" class="result-img">
-                        <div class="result-content">
-                            <h3 class="result-title">${result.title}</h3>
-                            <p class="result-desc">${result.description}</p>
-                            <a href="${result.link}" class="result-link">Explore</a>
-                        </div>
-                    `;
-                    searchResults.appendChild(resultCard);
-                });
-            }
-            
-            // Event listeners
-            searchButton.addEventListener('click', performSearch);
-            searchInput.addEventListener('keyup', function(event) {
-                if (event.key === 'Enter') {
-                    performSearch();
-                }
-            });
-            
-            // Category filtering
-            categoryButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Update active button
-                    categoryButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                    
-                    // Get current search results
-                    const query = searchInput.value.toLowerCase().trim();
-                    if (query === '') return;
-                    
-                    const results = siteData.filter(item => 
+
+                let results = [];
+
+                if (query === '') {
+                    results = siteData; // Show everything if blank
+                } else {
+                    results = siteData.filter(item => 
                         item.title.toLowerCase().includes(query) || 
                         item.description.toLowerCase().includes(query) ||
                         item.category.toLowerCase().includes(query)
                     );
-                    
-                    // Filter by category
-                    displayResults(results, button.dataset.category);
-                });
-            });
-            
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                if (this.resizeTimeout) clearTimeout(this.resizeTimeout);
-                this.resizeTimeout = setTimeout(() => {
-                    createStars();
-                }, 300);
-            });
-            
-            // Scroll effect for stars
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const stars = document.getElementById('stars');
-                if (stars) {
-                    stars.style.transform = `translateY(${scrolled * 0.3}px)`;
                 }
-            });
 
-            // Add example searches to demonstrate functionality when page loads
-            setTimeout(() => {
-                const demoSearches = ["nebula", "mars", "galaxy"];
-                const randomSearch = demoSearches[Math.floor(Math.random() * demoSearches.length)];
-                searchInput.value = randomSearch;
-                performSearch();
-            }, 1000);
-        });
+                displayResults(results, 'all');
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            function displayResults(results, category) {
+                searchResults.innerHTML = '';
+
+                const filteredResults = category === 'all' 
+                ? results 
+                : results.filter(item => item.category.toLowerCase() === category);
+
+                if (filteredResults.length === 0) {
+                    searchResults.innerHTML = `
+        <div class="no-results">
+          <p>No results found. Try a different search term or category.</p>
+        </div>
+      `;
+      return;
+    }
+
+    filteredResults.forEach(result => {
+      const resultCard = document.createElement('div');
+      resultCard.className = 'result-card';
+      resultCard.innerHTML = `
+        <img src="${result.image}" alt="${result.title}" class="result-img">
+        <div class="result-content">
+          <h3 class="result-title">${result.title}</h3>
+          <p class="result-desc">${result.description}</p>
+          <a href="${result.link}" class="result-link">Explore</a>
+        </div>
+      `;
+      searchResults.appendChild(resultCard);
+    });
+  }
+
+  searchButton.addEventListener('click', performSearch);
+  searchInput.addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+      performSearch();
+    }
+  });
+
+  categoryButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      categoryButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      const category = button.dataset.category.toLowerCase();
+      const query = searchInput.value.toLowerCase().trim();
+
+      let results = [];
+
+      if (query === '') {
+        results = siteData;
+      } else {
+        results = siteData.filter(item => 
+          item.title.toLowerCase().includes(query) || 
+          item.description.toLowerCase().includes(query) ||
+          item.category.toLowerCase().includes(query)
+        );
+      }
+
+      displayResults(results, category);
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    if (this.resizeTimeout) clearTimeout(this.resizeTimeout);
+    this.resizeTimeout = setTimeout(() => {
+      createStars();
+    }, 300);
+  });
+
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const stars = document.getElementById('stars');
+    if (stars) {
+      stars.style.transform = `translateY(${scrolled * 0.3}px)`;
+    }
+  });
+
+  setTimeout(() => {
+    const demoSearches = ["nebula", "mars", "galaxy"];
+    const randomSearch = demoSearches[Math.floor(Math.random() * demoSearches.length)];
+    searchInput.value = randomSearch;
+    performSearch();
+  }, 1000);
+});
     </script>
 </body>
 </html>
